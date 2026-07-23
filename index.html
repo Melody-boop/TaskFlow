@@ -17,10 +17,10 @@
     <!-- Header Section -->
     <div class="app-container">
         <header>
-            <p class="greeting">Good Morning, Melody!</p>
-            <p class="motivation">Ready to lock in and conquer today's goals?</p>
+            <p class="greeting">🌅 Good Morning, Melody!</p>
             <h1>TaskFlow</h1>
             <p class="tagline">Organize Your Day. Achieve Your Goals</p>
+            <p class="motivation">✨ Ready to lock in and conquer today's goals?</p>
 
         </header>
         <main>
@@ -38,14 +38,21 @@
                     <!-- <label for="task-input">New Task:</label> -->
                     <input type="text" id="task-input" class="task-input" placeholder="Enter a new task"
                         aria-label="Task title">
+                    <div class="task-actions">
 
-                    <label for="due-date">Due Date:</label>
-                    <input type="datetime-local" id="due-date" class="due-date">
+                        <div class="date-group">
+                            <label for="due-date">🗓️ Due Date & Time</label>
+                            <input type="datetime-local" id="due-date" class="due-date">
+                        </div>
 
-                    <button id="add-task-btn" type="submit">
-                        <i class="fa-solid fa-plus"></i>
-                        Add Task
-                    </button>
+                        <button id="add-task-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Task
+                        </button>
+
+                    </div>
+
+
                 </form>
             </section>
             <section class="filter-section">
@@ -60,16 +67,19 @@
 
                     <article class="stat-card">
                         <h3>Total</h3>
+                        <i class="fa-solid fa-list-check"></i>
                         <p id="total-tasks">0</p>
                     </article>
 
                     <article class="stat-card">
                         <h3>Pending</h3>
+                        <i class="fa-solid fa-hourglass-half"></i>
                         <p id="pending-tasks">0</p>
                     </article>
 
                     <article class="stat-card">
                         <h3>Completed</h3>
+                        <i class="fa-solid fa-circle-check"></i>
                         <p id="completed-tasks">0</p>
                     </article>
                 </div>

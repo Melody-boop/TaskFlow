@@ -36,17 +36,26 @@
     --border-radius: 16px;
 }
 
+/* ===========================
+   GLOBAL
+=========================== */
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--background-color);
+    font-family: "Inter", sans-serif;
+    background: #f3f5f9;
     color: var(--text-color);
-    min-height: 100vh;
-    padding: 40px;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 40px 20px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .app-container {
-    max-width: 600px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 720px;
 }
 
 /* ===========================
@@ -55,39 +64,55 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
 .greeting {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
 }
 
 .motivation {
     color: var(--secondary-text);
-    margin-bottom: 25px;
+    font-size: 1rem;
 }
 
 header h1 {
-
     font-size: 3rem;
-
-    color: var(--primary-color);
-
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .tagline {
-
-    font-size: 1.1rem;
-
+    font-size: 1rem;
     color: var(--secondary-text);
+    margin-bottom: 18px;
+}
 
+/* ===========================
+   CARDS
+=========================== */
+
+.search-section,
+.task-input-section,
+.statistics-section,
+.task-list-section {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+    margin-bottom: 24px;
 }
 
 .search-container {
-    max-width: 500px;
 
     display: flex;
 
@@ -95,93 +120,96 @@ header h1 {
 
     gap: 12px;
 
-    background: white;
+    border: 1px solid #ddd;
 
-    border-radius: var(--border-radius);
+    border-radius: 12px;
 
-    padding: 15px 20px;
-
-    box-shadow: var(--shadow);
-
-    margin: 0 auto 30px;
-}
-
-.search-container i {
-
-    color: gray;
-
-    font-size: 18px;
-
+    padding: 14px 18px;
 }
 
 .search-input {
-
-    flex: 1;
 
     border: none;
 
     outline: none;
 
+    flex: 1;
+
     font-size: 16px;
 
-    background: transparent;
-
+    background: none;
 }
 
-/* ===========================
-   TASK INPUT
-=========================== */
+.search-container i {
+
+    color: #888;
+}
 
 #task-form {
+
     display: flex;
-    gap: 15px;
-    align-items: center;
 
-    background: var(--card-color);
+    flex-direction: column;
 
-    padding: 20px;
-
-    border-radius: var(--border-radius);
-
-    box-shadow: var(--shadow);
-
-    margin-bottom: 30px;
-
-    flex-wrap: wrap;
+    gap: 18px;
 }
 
 .task-input {
 
-    flex: 1;
+    width: 100%;
 
-    max-width: 380px;
-
-    padding: 10px;
+    padding: 15px;
 
     border: 1px solid var(--border-color);
 
     border-radius: 12px;
 
-    font-size: 14px;
+    font-size: 15px;
+}
 
+.task-actions {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
 }
 
 .due-date {
 
     flex: 1;
 
-    padding: 10px;
-
-    border: 1px solid var(--border-color);
+    padding: 14px;
 
     border-radius: 12px;
 
-    font-size: 14px;
-    width: 150px;
+    border: 1px solid var(--border-color);
+}
 
+.date-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    align-items: center;
+}
+
+.date-group label {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--secondary-text);
+    white-space: nowrap;
 }
 
 #add-task-btn {
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
 
     background: var(--primary-color);
 
@@ -195,10 +223,6 @@ header h1 {
 
     cursor: pointer;
 
-    font-size: 16px;
-
-    font-weight: 600;
-
     transition: .3s;
 }
 
@@ -206,167 +230,156 @@ header h1 {
 
     background: var(--primary-hover);
 
+    transform: translateY(-2px);
 }
 
-#add-task-btn {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
 }
-
-/* ===========================
-   STATISTICS
-=========================== */
 
 .statistics-grid {
-
     display: grid;
-
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-
-    gap: 20px;
-
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
 }
 
 .stat-card {
+    background: #fafbfc;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
 
-    background: var(--card-color);
-
-    padding: 25px;
-
-    border-radius: var(--border-radius);
-
-    box-shadow: var(--shadow);
+    padding: 22px;
 
     text-align: center;
 
+    transition: all .25s ease;
+}
+
+.stat-card:hover {
+
+    transform: translateY(-4px);
+
+    border-color: var(--primary-color);
+}
+
+.stat-card i {
+
+    font-size: 1.8rem;
+
+    color: var(--primary-color);
+
+    margin-bottom: 15px;
 }
 
 .stat-card h3 {
 
+    font-size: .95rem;
+
     color: var(--secondary-text);
 
-    margin-bottom: 15px;
-
+    margin-bottom: 10px;
 }
 
 .stat-card p {
 
     font-size: 2rem;
 
-    font-weight: bold;
+    font-weight: 700;
 
-    color: var(--primary-color);
-
+    color: var(--text-color);
 }
 
 /* ===========================
-   FILTER BUTTONS
+   FILTERS
 =========================== */
 
 .filter-section {
-
     display: flex;
-
     justify-content: center;
-
-    gap: 15px;
-
-    margin-bottom: 35px;
-    justify-content: center;
-
+    gap: 12px;
+    margin: 28px 0;
 }
 
 .filter-btn {
-
     background: white;
+    color: var(--text-color);
 
-    border: none;
-
-    padding: 12px 22px;
+    border: 1px solid var(--border-color);
 
     border-radius: 30px;
 
+    padding: 10px 20px;
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
     cursor: pointer;
 
-    font-size: 15px;
-
-    font-weight: 500;
-
-    transition: .3s;
-
-    box-shadow: var(--shadow);
-
-}
-
-.filter-btn.active {
-
-    background: var(--primary-color);
-
-    color: white;
-
+    transition: all .25s ease;
 }
 
 .filter-btn:hover {
+    background: #eef4ff;
+    border-color: var(--primary-color);
+}
 
-    transform: translateY(-2px);
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
 
+.task-list-section ul {
+    list-style: none;
 }
 
 #empty-message {
-
     text-align: center;
 
     color: var(--secondary-text);
 
-    padding: 40px;
+    padding: 50px 20px;
 
-    background: white;
+    border: 2px dashed #dbe3ef;
 
-    border-radius: var(--border-radius);
+    border-radius: 16px;
 
-    box-shadow: var(--shadow);
-
+    background: #fafbfc;
 }
 
 footer {
-
-    margin-top: 60px;
-
     text-align: center;
+
+    margin-top: 40px;
 
     color: var(--secondary-text);
 
     font-size: .9rem;
-
 }
 
-@media (max-width: 768px) {
+.task-input,
+.due-date,
+.search-input {
 
-    body {
-        padding: 20px;
-    }
+    transition: .25s ease;
+}
 
-    .task-input {
-        flex: 2;
-    }
+.task-input:focus,
+.due-date:focus,
+.search-container:focus-within {
 
-    .due-date {
-        flex: 1;
-    }
+    border-color: var(--primary-color);
 
-    #add-task-btn {
-        padding: 12px 18px;
-    }
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
 
-    .statistics-section {
-        grid-template-columns: 1fr;
-    }
-
-    .filter-section {
-        flex-wrap: wrap;
-    }
+* {
+    transition:
+        background-color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
 }
