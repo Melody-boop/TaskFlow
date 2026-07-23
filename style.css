@@ -1,0 +1,372 @@
+/* ===========================
+   CSS RESET
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===========================
+   DESIGN SYSTEM
+=========================== */
+
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    --background-color: #f5f7fb;
+
+    --card-color: #ffffff;
+
+    --text-color: #1f2937;
+
+    --secondary-text: #6b7280;
+
+    --border-color: #d1d5db;
+
+    --success-color: #16a34a;
+
+    --danger-color: #dc2626;
+
+    --shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    --border-radius: 16px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.greeting {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.motivation {
+    color: var(--secondary-text);
+    margin-bottom: 25px;
+}
+
+header h1 {
+
+    font-size: 3rem;
+
+    color: var(--primary-color);
+
+    margin-bottom: 10px;
+}
+
+.tagline {
+
+    font-size: 1.1rem;
+
+    color: var(--secondary-text);
+
+}
+
+.search-container {
+    max-width: 500px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: white;
+
+    border-radius: var(--border-radius);
+
+    padding: 15px 20px;
+
+    box-shadow: var(--shadow);
+
+    margin: 0 auto 30px;
+}
+
+.search-container i {
+
+    color: gray;
+
+    font-size: 18px;
+
+}
+
+.search-input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 16px;
+
+    background: transparent;
+
+}
+
+/* ===========================
+   TASK INPUT
+=========================== */
+
+#task-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+    background: var(--card-color);
+
+    padding: 20px;
+
+    border-radius: var(--border-radius);
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 30px;
+
+    flex-wrap: wrap;
+}
+
+.task-input {
+
+    flex: 1;
+
+    max-width: 380px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+}
+
+.due-date {
+
+    flex: 1;
+
+    padding: 10px;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    font-size: 14px;
+    width: 150px;
+
+}
+
+#add-task-btn {
+
+    background: var(--primary-color);
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+#add-task-btn:hover {
+
+    background: var(--primary-hover);
+
+}
+
+#add-task-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+/* ===========================
+   STATISTICS
+=========================== */
+
+.statistics-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+
+    gap: 20px;
+
+}
+
+.stat-card {
+
+    background: var(--card-color);
+
+    padding: 25px;
+
+    border-radius: var(--border-radius);
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+
+}
+
+.stat-card h3 {
+
+    color: var(--secondary-text);
+
+    margin-bottom: 15px;
+
+}
+
+.stat-card p {
+
+    font-size: 2rem;
+
+    font-weight: bold;
+
+    color: var(--primary-color);
+
+}
+
+/* ===========================
+   FILTER BUTTONS
+=========================== */
+
+.filter-section {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-bottom: 35px;
+    justify-content: center;
+
+}
+
+.filter-btn {
+
+    background: white;
+
+    border: none;
+
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition: .3s;
+
+    box-shadow: var(--shadow);
+
+}
+
+.filter-btn.active {
+
+    background: var(--primary-color);
+
+    color: white;
+
+}
+
+.filter-btn:hover {
+
+    transform: translateY(-2px);
+
+}
+
+#empty-message {
+
+    text-align: center;
+
+    color: var(--secondary-text);
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: var(--border-radius);
+
+    box-shadow: var(--shadow);
+
+}
+
+footer {
+
+    margin-top: 60px;
+
+    text-align: center;
+
+    color: var(--secondary-text);
+
+    font-size: .9rem;
+
+}
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .task-input {
+        flex: 2;
+    }
+
+    .due-date {
+        flex: 1;
+    }
+
+    #add-task-btn {
+        padding: 12px 18px;
+    }
+
+    .statistics-section {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-section {
+        flex-wrap: wrap;
+    }
+}

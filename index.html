@@ -7,77 +7,86 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <title>TaskFlow | Organize Your Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <!-- Header Section -->
-    <header>
-        <p class="greeting">Good Morning, Melody!</p>
-        <p class="motivation">Ready to lock in and conquer today's goals?</p>
-        <h1>TaskFlow</h1>
-        <p class="tagline">Organize Your Day. Achieve Your Goals</p>
-    </header>
-    <main>
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" id="search" class="search-input" placeholder="Search tasks..."
-                    aria-label="Search tasks">
-            </div>
-        </section>
-        <!-- Task Input Section -->
-        <section class="task-input-section">
-            <form id="task-form">
-                <!-- <label for="task-input">New Task:</label> -->
-                <input type="text" id="task-input" class="task-input" placeholder="Enter a new task"
-                    aria-label="Task title">
+    <div class="app-container">
+        <header>
+            <p class="greeting">Good Morning, Melody!</p>
+            <p class="motivation">Ready to lock in and conquer today's goals?</p>
+            <h1>TaskFlow</h1>
+            <p class="tagline">Organize Your Day. Achieve Your Goals</p>
 
-                <label for="due-date">Due Date:</label>
-                <input type="datetime-local" id="due-date" class="due-date">
+        </header>
+        <main>
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="search" class="search-input" placeholder="Search tasks..."
+                        aria-label="Search tasks">
+                </div>
+            </section>
+            <!-- Task Input Section -->
+            <section class="task-input-section">
+                <form id="task-form">
+                    <!-- <label for="task-input">New Task:</label> -->
+                    <input type="text" id="task-input" class="task-input" placeholder="Enter a new task"
+                        aria-label="Task title">
 
-                <button id="add-task-btn" type="submit">
-                    <i class="fa-solid fa-plus"></i>
-                    Add Task
-                </button>
-            </form>
-        </section>
-        <section class="filter-section">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Active</button>
-            <button class="filter-btn">Completed</button>
-        </section>
+                    <label for="due-date">Due Date:</label>
+                    <input type="datetime-local" id="due-date" class="due-date">
 
-        <section class="statistics-section">
-            <h2>Task Statistics</h2>
+                    <button id="add-task-btn" type="submit">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Task
+                    </button>
+                </form>
+            </section>
+            <section class="filter-section">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Active</button>
+                <button class="filter-btn">Completed</button>
+            </section>
 
-            <article class="stat-card">
-                <h3>Total</h3>
-                <p id="total-tasks">0</p>
-            </article>
+            <section class="statistics-section">
+                <h2 class="section-title">Task Statistics</h2>
+                <div class="statistics-grid">
 
-            <article class="stat-card">
-                <h3>Pending</h3>
-                <p id="pending-tasks">0</p>
-            </article>
+                    <article class="stat-card">
+                        <h3>Total</h3>
+                        <p id="total-tasks">0</p>
+                    </article>
 
-            <article class="stat-card">
-                <h3>Completed</h3>
-                <p id="completed-tasks">0</p>
-            </article>
+                    <article class="stat-card">
+                        <h3>Pending</h3>
+                        <p id="pending-tasks">0</p>
+                    </article>
 
-        </section>
+                    <article class="stat-card">
+                        <h3>Completed</h3>
+                        <p id="completed-tasks">0</p>
+                    </article>
+                </div>
 
-        <section class="task-list-section">
-            <h2>Your Tasks</h2>
-            <p id="empty-message">🎉 No tasks yet. Add your first task to get started!</p>
-            <ul id="task-list">
-                <!-- Tasks will be dynamically added here -->
+            </section>
 
-            </ul>
-        </section>
+            <section class="task-list-section">
+                <h2>Your Tasks</h2>
+                <p id="empty-message">🎉 No tasks yet. Add your first task to get started!</p>
+                <ul id="task-list">
+                    <!-- Tasks will be dynamically added here -->
 
-    </main>
+                </ul>
+            </section>
+
+        </main>
+    </div>
     <footer>
         <p>&copy; 2026 TaskFlow. Built by Melody.</p>
     </footer>
