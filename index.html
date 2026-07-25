@@ -15,84 +15,148 @@
 
 <body>
     <!-- Header Section -->
+    <div id="notification"></div>
     <div class="app-container">
         <header>
-            <p class="greeting">🌅 Good Morning, Melody!</p>
+            <div class="profile-badge">
+                <i class="fa-solid fa-user"></i>
+                <span id="username">Guest</span>
+            </div>
+            <p class="greeting" id="greeting"></p>
+
             <h1>TaskFlow</h1>
             <p class="tagline">Organize Your Day. Achieve Your Goals</p>
             <p class="motivation">✨ Ready to lock in and conquer today's goals?</p>
+            <button id="theme-toggle" class="theme-btn">
+                <i class="fa-solid fa-moon"></i>
+            </button>
 
         </header>
         <main>
             <!-- Search Section -->
-            <section class="search-section">
-                <div class="search-container">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="search" id="search" class="search-input" placeholder="Search tasks..."
-                        aria-label="Search tasks">
-                </div>
-            </section>
             <!-- Task Input Section -->
             <section class="task-input-section">
                 <form id="task-form">
-                    <!-- <label for="task-input">New Task:</label> -->
+
                     <input type="text" id="task-input" class="task-input" placeholder="Enter a new task"
                         aria-label="Task title">
-                    <div class="task-actions">
 
-                        <div class="date-group">
-                            <label for="due-date">🗓️ Due Date & Time</label>
-                            <input type="datetime-local" id="due-date" class="due-date">
+
+                    <div class="date-row">
+
+                        <div class="input-group">
+                            <label for="due-date">
+                                <i class="fa-regular fa-calendar"></i>
+                                Due Date
+                            </label>
+
+                            <input type="date" id="due-date" class="due-date">
                         </div>
 
-                        <button id="add-task-btn">
-                            <i class="fa-solid fa-plus"></i>
-                            Add Task
-                        </button>
+
+                        <div class="input-group">
+                            <label for="due-time">
+                                <i class="fa-regular fa-clock"></i>
+                                Time
+                            </label>
+
+                            <input type="time" id="due-time" class="due-time">
+                        </div>
+
+
+                        <div class="input-group">
+                            <label for="priority">
+                                Priority
+                            </label>
+
+                            <select id="priority" class="priority-select">
+                                <option value="Low">🟢 Low</option>
+                                <option value="Medium" selected>🟡 Medium</option>
+                                <option value="High">🔴 High</option>
+                            </select>
+
+                        </div>
 
                     </div>
 
 
+                    <button id="add-task-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Task
+                    </button>
+
                 </form>
             </section>
-            <section class="filter-section">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Active</button>
-                <button class="filter-btn">Completed</button>
-            </section>
 
-            <section class="statistics-section">
-                <h2 class="section-title">Task Statistics</h2>
-                <div class="statistics-grid">
 
-                    <article class="stat-card">
-                        <h3>Total</h3>
-                        <i class="fa-solid fa-list-check"></i>
-                        <p id="total-tasks">0</p>
-                    </article>
+            <!-- Search Section -->
+            <section class="search-section">
 
-                    <article class="stat-card">
-                        <h3>Pending</h3>
-                        <i class="fa-solid fa-hourglass-half"></i>
-                        <p id="pending-tasks">0</p>
-                    </article>
+                <div class="search-container">
 
-                    <article class="stat-card">
-                        <h3>Completed</h3>
-                        <i class="fa-solid fa-circle-check"></i>
-                        <p id="completed-tasks">0</p>
-                    </article>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="search" id="search" class="search-input" placeholder="Search tasks..."
+                        aria-label="Search tasks">
+
                 </div>
 
             </section>
-
+            <!-- Task List Section -->
             <section class="task-list-section">
-                <h2>Your Tasks</h2>
-                <p id="empty-message">🎉 No tasks yet. Add your first task to get started!</p>
+
+                <h2 class="section-title">Your Tasks</h2>
+
+                <p id="empty-message">
+                    🎉 No tasks yet. Add your first task to get started!
+                </p>
+
                 <ul id="task-list">
                     <!-- Tasks will be dynamically added here -->
-
                 </ul>
+
+            </section>
+
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Active</button>
+                <button class="filter-btn">Completed</button>
+
+            </section>
+
+
+            <!-- Statistics Section -->
+            <section class="statistics-section">
+
+                <h2 class="section-title">Task Statistics</h2>
+
+                <div class="statistics-grid">
+
+                    <article class="stat-card">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h3>Total</h3>
+                        <p id="total-tasks">0</p>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <h3>Pending</h3>
+                        <p id="pending-tasks">0</p>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h3>Completed</h3>
+                        <p id="completed-tasks">0</p>
+                    </article>
+
+                </div>
+
             </section>
 
         </main>

@@ -36,14 +36,23 @@
     --border-radius: 16px;
 }
 
+.dark-mode {
+    --card-color: #1e1e1e;
+    --text-color: #f5f5f5;
+    --secondary-text: #a1a1aa;
+    --border-color: #333333;
+    --primary-color: #818cf8;
+}
+
 /* ===========================
    GLOBAL
 =========================== */
 
 body {
     font-family: "Inter", sans-serif;
-    background: #f3f5f9;
+    background: var(--background-color);
     color: var(--text-color);
+    transition: .3s;
 
     display: flex;
     justify-content: center;
@@ -65,6 +74,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 32px;
+    position: relative;
 }
 
 .greeting {
@@ -101,7 +111,7 @@ header h1 {
 .statistics-section,
 .task-list-section {
 
-    background: white;
+    background: var(--card-color);
 
     border-radius: 18px;
 
@@ -113,18 +123,16 @@ header h1 {
 }
 
 .search-container {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
 
     border-radius: 12px;
-
     padding: 14px 18px;
+
+    background: var(--card-color);
 }
 
 .search-input {
@@ -137,12 +145,18 @@ header h1 {
 
     font-size: 16px;
 
-    background: none;
+    background: transparent;
+
+    color: var(--text-color)
+}
+
+.search-input::placeholder {
+    color: var(--secondary-text);
 }
 
 .search-container i {
 
-    color: #888;
+    color: var(--secondary-text);
 }
 
 #task-form {
@@ -167,7 +181,7 @@ header h1 {
     font-size: 15px;
 }
 
-.task-actions {
+.task-form-actions {
 
     display: flex;
 
@@ -176,23 +190,54 @@ header h1 {
     gap: 15px;
 }
 
-.due-date {
+.due-date,
+.due-time,
+.priority-select {
 
-    flex: 1;
+    width: 100%;
 
-    padding: 14px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--border-color);
 
     border-radius: 12px;
 
-    border: 1px solid var(--border-color);
+    font-size: .95rem;
+
+    background: var(--card-color);
+    color: var(--text-color);
+
+    transition: .25s;
 }
 
-.date-group {
+.dark-mode .due-date,
+.dark-mode .due-time {
+    color-scheme: dark;
+}
+
+.date-row {
+    display: flex;
+    gap: 18px;
+}
+
+.input-group {
+    flex: 1;
+
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    flex: 1;
+
+    gap: 8px;
+}
+
+.input-group label {
+    display: flex;
     align-items: center;
+    gap: 8px;
+
+    font-size: .9rem;
+    font-weight: 600;
+
+    color: var(--secondary-text);
 }
 
 .date-group label {
@@ -200,6 +245,16 @@ header h1 {
     font-weight: 600;
     color: var(--secondary-text);
     white-space: nowrap;
+}
+
+.due-date:focus,
+.due-time:focus {
+
+    outline: none;
+
+    border-color: var(--primary-color);
+
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
 }
 
 #add-task-btn {
@@ -247,7 +302,7 @@ header h1 {
 }
 
 .stat-card {
-    background: #fafbfc;
+    background: var(--card-color);
     border: 1px solid #e5e7eb;
     border-radius: 16px;
 
@@ -337,18 +392,32 @@ header h1 {
     list-style: none;
 }
 
+#task-list {
+    margin-top: 20px;
+}
+
+
 #empty-message {
     text-align: center;
 
     color: var(--secondary-text);
 
-    padding: 50px 20px;
+    padding: 25px 20px;
 
-    border: 2px dashed #dbe3ef;
+    border: 1px dashed var(--border-color);
 
-    border-radius: 16px;
+    border-radius: 12px;
 
-    background: #fafbfc;
+    background: var(--background-color);
+
+    font-size: .95rem;
+
+    font-weight: 500;
+}
+
+.dark-mode #empty-message {
+    color: #cbd5e1;
+    background: #111827;
 }
 
 footer {
@@ -382,4 +451,445 @@ footer {
         background-color .2s ease,
         border-color .2s ease,
         transform .2s ease;
+}
+
+.priority-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: .95rem;
+    background: white;
+    transition: .25s;
+}
+
+.due-date:focus,
+.due-time:focus,
+.priority-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+}
+
+/* ===========================
+   TASK CARDS
+=========================== */
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    background: var(--card-color);
+
+    color: var(--text-color);
+
+    padding: 18px 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid var(--border-color);
+
+    margin-bottom: 16px;
+
+    box-shadow: var(--shadow);
+
+    transition: .25s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-3px);
+}
+
+.task-content h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.task-content p {
+    font-size: .9rem;
+    color: var(--secondary-text);
+}
+
+.task-card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.complete-btn,
+.edit-btn,
+.delete-btn {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition: .25s ease;
+
+    font-size: 15px;
+}
+
+.complete-btn {
+
+    background: #e8f8ec;
+
+    color: var(--success-color);
+}
+
+.complete-btn:hover {
+
+    background: var(--success-color);
+
+    color: white;
+}
+
+.edit-btn {
+
+    background: #eef4ff;
+
+    color: var(--primary-color);
+}
+
+.edit-btn:hover {
+
+    background: var(--primary-color);
+
+    color: white;
+}
+
+.delete-btn {
+
+    background: #fdecec;
+
+    color: var(--danger-color);
+}
+
+.delete-btn:hover {
+
+    background: var(--danger-color);
+
+    color: white;
+}
+
+.completed {
+
+    opacity: .7;
+}
+
+.completed h3 {
+
+    text-decoration: line-through;
+
+    color: var(--secondary-text);
+}
+
+/* ===========================
+   PRIORITY BADGES
+=========================== */
+
+.priority-badge {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    font-size: .8rem;
+
+    font-weight: 600;
+
+    color: white;
+
+}
+
+.priority-badge.high {
+    background: #dc2626;
+}
+
+.priority-badge.medium {
+    background: #f59e0b;
+}
+
+.priority-badge.low {
+    background: #16a34a;
+}
+
+/* ===========================
+   THEME BUTTON
+=========================== */
+
+.theme-btn {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--primary-color);
+    color: white;
+
+    cursor: pointer;
+
+    font-size: .95rem;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .3s;
+}
+
+.theme-btn:hover {
+
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+
+}
+
+/* ===========================
+   PREMIUM DARK MODE POLISH
+=========================== */
+
+.dark-mode {
+    --background-color: #0f172a;
+    --card-color: #1e293b;
+
+    --text-color: #f8fafc;
+    --secondary-text: #cbd5e1;
+
+    --border-color: #334155;
+
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+}
+
+
+/* Cards */
+.dark-mode .search-section,
+.dark-mode .task-input-section,
+.dark-mode .statistics-section,
+.dark-mode .task-list-section,
+.dark-mode .task-card {
+    background: var(--card-color);
+    border-color: var(--border-color);
+}
+
+
+/* Main headings */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode .section-title {
+    color: #f8fafc;
+    font-weight: 700;
+}
+
+
+/* Normal text */
+.dark-mode p,
+.dark-mode label,
+.dark-mode .task-content p {
+    color: #cbd5e1;
+}
+
+
+/* Inputs */
+.dark-mode input,
+.dark-mode select {
+    background: #111827;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+.dark-mode input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* Add task button */
+.dark-mode #add-task-btn {
+    background: #3b82f6;
+    color: white;
+    font-weight: 700;
+}
+
+.dark-mode #add-task-btn:hover {
+    background: #2563eb;
+}
+
+
+/* Filter buttons */
+.dark-mode .filter-btn {
+    background: #1e293b;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+.dark-mode .filter-btn:hover {
+    background: #334155;
+}
+
+
+/* Theme button */
+.dark-mode .theme-btn {
+    background: #3b82f6;
+    color: white;
+}
+
+
+/* Task action buttons */
+.dark-mode .complete-btn {
+    background: #14532d;
+    color: #86efac;
+}
+
+.dark-mode .edit-btn {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+.dark-mode .delete-btn {
+    background: #450a0a;
+    color: #fca5a5;
+}
+
+/* ===========================
+   SEARCH DARK MODE POLISH
+=========================== */
+
+.search-container {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+}
+
+.search-input {
+    background: transparent;
+    color: var(--text-color);
+}
+
+.dark-mode .search-container {
+    background: #111827;
+    border-color: #475569;
+}
+
+.dark-mode .search-input {
+    color: #f8fafc;
+}
+
+.dark-mode .search-container i {
+    color: #94a3b8;
+}
+
+/* Date and time icon visibility */
+.input-group label i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.dark-mode .input-group label i {
+    color: #60a5fa;
+}
+
+#task-list {
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.task-card {
+    display: flex;
+    background: var(--card-color);
+    color: var(--text-color);
+}
+
+#notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    background: var(--primary-color);
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    box-shadow: var(--shadow);
+
+    transform: translateY(-100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 9999;
+}
+
+#notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+header {
+    position: relative;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.profile-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+
+    box-shadow: var(--shadow);
+
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.profile-badge i {
+    color: var(--primary-color);
+}
+
+.theme-btn {
+    top: 20px;
+    right: 20px;
 }
