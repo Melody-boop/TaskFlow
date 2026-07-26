@@ -18,10 +18,10 @@
     <div id="notification"></div>
     <div class="app-container">
         <header>
-            <div class="profile-badge">
+            <button id="change-name" class="profile-badge">
                 <i class="fa-solid fa-user"></i>
                 <span id="username">Guest</span>
-            </div>
+            </button>
             <p class="greeting" id="greeting"></p>
 
             <h1>TaskFlow</h1>
@@ -130,11 +130,8 @@
 
             <!-- Statistics Section -->
             <section class="statistics-section">
-
                 <h2 class="section-title">Task Statistics</h2>
-
                 <div class="statistics-grid">
-
                     <article class="stat-card">
                         <i class="fa-solid fa-list-check"></i>
                         <h3>Total</h3>
@@ -164,6 +161,122 @@
     <footer>
         <p>&copy; 2026 TaskFlow. Built by Melody.</p>
     </footer>
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal">
+
+        <div class="modal-content">
+
+            <h2>🗑 Delete Task</h2>
+
+            <p>Are you sure you want to delete this task?</p>
+
+            <div class="modal-buttons">
+
+                <button id="cancel-delete" class="cancel-btn">
+                    Cancel
+                </button>
+
+                <button id="confirm-delete" class="confirm-btn">
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Edit Task Modal -->
+    <div id="edit-modal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Edit Task</h2>
+                <button id="close-modal" class="close-modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="input-group">
+
+                <label for="edit-task-input">Task</label>
+
+                <input type="text" id="edit-task-input" class="task-input">
+
+            </div>
+
+            <div class="date-row">
+
+                <div class="input-group">
+
+                    <label for="edit-date">Due Date</label>
+
+                    <input type="date" id="edit-date" class="due-date">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="edit-time">Time</label>
+
+                    <input type="time" id="edit-time" class="due-time">
+
+                </div>
+                <div class="input-group">
+
+                    <label for="edit-priority">Priority</label>
+
+                    <select id="edit-priority" class="priority-select">
+                        <option value="Low">🟢 Low</option>
+                        <option value="Medium" selected>🟡 Medium</option>
+                        <option value="High">🔴 High</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button id="cancel-edit" class="cancel-btn">
+
+                    Cancel
+
+                </button>
+
+                <button id="save-edit" class="confirm-btn">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="modal">
+
+        <div class="modal-content">
+
+            <h2>👋 Welcome to TaskFlow</h2>
+
+            <p>What should we call you?</p>
+
+            <div class="input-group">
+
+                <input type="text" id="name-input" class="task-input" placeholder="Enter your name">
+            </div>
+            <div class="modal-buttons">
+                <button id="save-name" class="confirm-btn">
+                    Continue
+                </button>
+            </div>
+            <p id="skip-name" class="skip-link">
+                Continue as Guest
+            </p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 

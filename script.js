@@ -2,6 +2,19 @@
 // ===========================
 // SELECT HTML ELEMENTS
 // ===========================
+const editModal = document.getElementById("edit-modal");
+
+const editTaskInput = document.getElementById("edit-task-input");
+
+const editDate = document.getElementById("edit-date");
+
+const editTime = document.getElementById("edit-time");
+
+const editPriority = document.getElementById("edit-priority");
+
+const cancelEdit = document.getElementById("cancel-edit");
+
+const saveEdit = document.getElementById("save-edit");
 
 const taskForm = document.getElementById("task-form");
 
@@ -23,6 +36,13 @@ const emptyMessage = document.getElementById("empty-message");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
 const priority = document.getElementById("priority");
+const welcomeModal = document.getElementById("welcome-modal");
+
+const nameInput = document.getElementById("name-input");
+
+const saveName = document.getElementById("save-name");
+
+const username = document.getElementById("username");
 
 const searchInput = document.getElementById("search");
 const themeToggle = document.getElementById("theme-toggle");
@@ -30,34 +50,63 @@ const themeBtn = document.querySelector(".theme-btn");
 const greeting = document.getElementById("greeting");
 const changeNameBtn = document.getElementById("change-name");
 const notification = document.getElementById("notification");
+const deleteModal = document.getElementById("delete-modal");
+const cancelDelete = document.getElementById("cancel-delete");
+const confirmDelete = document.getElementById("confirm-delete");
+const closeModalBtn = document.getElementById("close-modal");
+const skipName = document.getElementById("skip-name");
 
-function showNotification(message) {
+skipName.addEventListener("click", function () {
+
+    welcomeModal.classList.remove("show");
+
+    updateGreeting();
+
+});
+closeModalBtn.addEventListener("click", function () {
+
+    editModal.classList.remove("show");
+
+    taskToEdit = null;
+
+});
+
+let taskToDelete = null;
+let taskToEdit = null;
+
+function showNotification(message, type = "info") {
+
+    //const notification = document.getElementById("notification");
 
     notification.textContent = message;
 
+    notification.className = "";
+
+    notification.classList.add(type);
+
     notification.classList.add("show");
 
-    setTimeout(() => {
+    setTimeout(function () {
+
         notification.classList.remove("show");
-    }, 2500);
+
+    }, 3000);
 
 }
-
-
 function updateGreeting() {
 
     let name = localStorage.getItem("username");
 
+    // If no name has been saved, show the welcome modal
     if (!name) {
-        name = prompt("Welcome to TaskFlow! What is your name?");
-
-        if (name) {
-            localStorage.setItem("username", name);
-        } else {
-            name = "User";
-        }
+        name = "Guest";
+        return;
     }
 
+    // Update profile badge
+    username.textContent = name;
+
+    // Decide greeting based on time
     const hour = new Date().getHours();
 
     let message = "";
@@ -73,23 +122,46 @@ function updateGreeting() {
     }
 
     greeting.textContent = `${message}, ${name}!`;
+
 }
 
 
 updateGreeting();
 
 if (changeNameBtn) {
+
     changeNameBtn.addEventListener("click", function () {
 
-        const newName = prompt("Enter your name:");
+        nameInput.value = localStorage.getItem("username") || "";
 
-        if (newName) {
-            localStorage.setItem("username", newName);
-            updateGreeting();
-        }
+        welcomeModal.classList.add("show");
 
     });
+
 }
+
+saveName.addEventListener("click", function () {
+
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+
+        showNotification("Please enter your name.", "error");
+
+        return;
+
+    }
+
+    localStorage.setItem("username", name);
+    username.textContent = name;
+
+    welcomeModal.classList.remove("show");
+
+    updateGreeting();
+
+    showNotification(`👋 Welcome, ${name}!`, "success");
+
+});
 
 
 // Load saved theme
@@ -185,10 +257,50 @@ function sortTasks() {
     });
 
 
+
     taskList.innerHTML = "";
 
     tasks.forEach(function (task) {
         taskList.appendChild(task);
+    });
+
+}
+function updateOverdueTasks() {
+
+    const now = new Date();
+
+    document.querySelectorAll(".task-card").forEach(function (task) {
+
+        // Completed tasks can never be overdue
+        if (task.classList.contains("completed")) {
+            task.classList.remove("overdue");
+            return;
+        }
+
+        const date = task.dataset.date;
+        const time = task.dataset.time;
+
+        // No due date = not overdue
+        if (!date) {
+            task.classList.remove("overdue");
+            return;
+        }
+
+        // Build the full due date and time
+        let dueDateTime;
+
+        if (time) {
+            dueDateTime = new Date(`${date}T${time}`);
+        } else {
+            dueDateTime = new Date(`${date}T23:59`);
+        }
+
+        if (dueDateTime < now) {
+            task.classList.add("overdue");
+        } else {
+            task.classList.remove("overdue");
+        }
+
     });
 
 }
@@ -263,6 +375,7 @@ function loadTasks() {
             task.completed
         );
     });
+    updateOverdueTasks();
     updateTaskDisplay();
 }
 function createTask(taskText, dueDateValue, dueTimeValue, priorityValue, isCompleted = false) {
@@ -271,6 +384,7 @@ function createTask(taskText, dueDateValue, dueTimeValue, priorityValue, isCompl
     newTask.dataset.date = dueDateValue;
     newTask.dataset.time = dueTimeValue;
     newTask.dataset.priority = priorityValue;
+    newTask.dataset.created = new Date().toLocaleString();
     newTask.classList.add("task-card");
     if (isCompleted) {
         newTask.classList.add("completed");
@@ -305,52 +419,26 @@ function createTask(taskText, dueDateValue, dueTimeValue, priorityValue, isCompl
     const editBtn = newTask.querySelector(".edit-btn");
 
     editBtn.addEventListener("click", function () {
-        const taskTitle = newTask.querySelector("h3");
-        const taskDate = newTask.querySelector("p");
-        const priorityBadge = newTask.querySelector(".priority-badge");
-        const updatedTask = prompt("Edit task:", taskTitle.textContent);
 
-        if (updatedTask === null || updatedTask.trim() === "") {
-            return;
-        }
-        const updatedDate = prompt("Edit date:", newTask.dataset.date);
-        if (updatedDate === null) return;
-        const updatedTime = prompt("Edit time:", newTask.dataset.time);
-        if (updatedTime === null) return;
-        const updatedPriority = prompt(
-            "Edit priority (High, Medium, Low):",
-            newTask.dataset.priority
-        );
-        if (updatedPriority === null) {
-            return;
-        }
-        const normalizedPriority =
-            updatedPriority.charAt(0).toUpperCase() +
-            updatedPriority.slice(1).toLowerCase();
+        taskToEdit = newTask;
 
-        const validPriorities = ["High", "Medium", "Low"];
-        if (!validPriorities.includes(normalizedPriority)) {
-            showNotification("Priority must be High, Medium or Low.");
-            return;
-        }
-        taskTitle.textContent = updatedTask.trim();
-        newTask.dataset.date = updatedDate;
-        newTask.dataset.time = updatedTime;
-        newTask.dataset.priority = normalizedPriority;
-        priorityBadge.textContent = normalizedPriority;
-        priorityBadge.className =
-            `priority-badge ${normalizedPriority.toLowerCase()}`;
-        taskDate.textContent = formatDueDate(updatedDate, updatedTime);
-        saveTasks();
+        editTaskInput.value = newTask.querySelector("h3").textContent;
+
+        editDate.value = newTask.dataset.date;
+
+        editTime.value = newTask.dataset.time;
+
+        editPriority.value = newTask.dataset.priority;
+
+        editModal.classList.add("show");
+
     });
     deleteBtn.addEventListener("click", function () {
-        newTask.remove();
-        updateStatistics();
-        saveTasks();
 
-        if (taskList.children.length === 0) {
-            emptyMessage.style.display = "block";
-        }
+        taskToDelete = newTask;
+
+        deleteModal.classList.add("show");
+
     });
     completeBtn.addEventListener("click", function () {
         newTask.classList.toggle("completed");
@@ -394,6 +482,7 @@ taskForm.addEventListener("submit", function (event) {
     );
 
     saveTasks();
+    updateOverdueTasks();
 
     clearForm();
 
@@ -422,4 +511,87 @@ searchInput.addEventListener("input", function () {
     updateTaskDisplay();
 
 });
+cancelDelete.addEventListener("click", function () {
+
+    deleteModal.classList.remove("show");
+
+    taskToDelete = null;
+
+});
+confirmDelete.addEventListener("click", function () {
+
+    if (taskToDelete) {
+
+        taskToDelete.remove();
+
+        updateStatistics();
+
+        saveTasks();
+
+        showNotification("🗑 Task deleted.", "info");
+
+        if (taskList.children.length === 0) {
+            emptyMessage.style.display = "block";
+        }
+
+    }
+
+    deleteModal.classList.remove("show");
+
+    taskToDelete = null;
+
+});
+saveEdit.addEventListener("click", function () {
+
+    if (!taskToEdit) return;
+
+    const taskTitle = taskToEdit.querySelector("h3");
+    const taskDate = taskToEdit.querySelector("p");
+    const priorityBadge = taskToEdit.querySelector(".priority-badge");
+
+    const newTitle = editTaskInput.value.trim();
+
+    if (newTitle === "") {
+        showNotification("Task title cannot be empty.", "error");
+        return;
+    }
+
+    taskTitle.textContent = newTitle;
+
+    taskToEdit.dataset.date = editDate.value;
+    taskToEdit.dataset.time = editTime.value;
+    taskToEdit.dataset.priority = editPriority.value;
+
+    taskDate.textContent = formatDueDate(editDate.value, editTime.value);
+
+    priorityBadge.textContent = editPriority.value;
+    priorityBadge.className =
+        `priority-badge ${editPriority.value.toLowerCase()}`;
+
+    saveTasks();
+    updateOverdueTasks();
+
+    editModal.classList.remove("show");
+
+    taskToEdit = null;
+
+    showNotification("✏️ Task updated successfully!", "success");
+
+});
+cancelEdit.addEventListener("click", function () {
+
+    editModal.classList.remove("show");
+
+    taskToEdit = null;
+
+});
+saveTasks();
+sortTasks();
+loadTasks();
+updateStatistics();
+updateOverdueTasks();
 updateTaskDisplay();
+editModal.classList.remove("show");
+//showNotification("🎉 TaskFlow notifications are working!", "success");
+//showNotification("Error", "error");
+//showNotification("Information", "info");
