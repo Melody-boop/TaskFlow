@@ -343,26 +343,29 @@ function updateTaskDisplay() {
 
 }
 function saveTasks() {
-    console.log("Saving tasks");
 
     const tasks = [];
 
-    document.querySelectorAll(".task-card").forEach(function (task) {
+    const allTasks = document.querySelectorAll(".task-card");
+
+    console.log("Number of task cards:", allTasks.length);
+
+    allTasks.forEach(function (task) {
 
         tasks.push({
-
             title: task.querySelector("h3").textContent,
-
             date: task.dataset.date,
-
             time: task.dataset.time,
-
             priority: task.dataset.priority,
-
             completed: task.classList.contains("completed")
         });
+
     });
+
+    console.log(tasks);
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
 }
 function loadTasks() {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -585,9 +588,9 @@ cancelEdit.addEventListener("click", function () {
     taskToEdit = null;
 
 });
-saveTasks();
-sortTasks();
+
 loadTasks();
+sortTasks();
 updateStatistics();
 updateOverdueTasks();
 updateTaskDisplay();
