@@ -1159,3 +1159,45 @@ button:active {
 .task-card {
     animation: taskFadeIn .35s ease;
 }
+
+@keyframes fadeInTask {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.task-card {
+
+    animation: fadeInTask .3s ease;
+
+}
+
+@keyframes taskComplete {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.task-card.completed {
+
+    animation: taskComplete .35s ease;
+
+}

@@ -57,10 +57,14 @@ const closeModalBtn = document.getElementById("close-modal");
 const skipName = document.getElementById("skip-name");
 
 skipName.addEventListener("click", function () {
+    localStorage.setItem("username", "Guest");
+
+    username.textContent = "Guest";
 
     welcomeModal.classList.remove("show");
 
     updateGreeting();
+    showNotification("👋 Welcome, Guest!", "success");
 
 });
 closeModalBtn.addEventListener("click", function () {
@@ -95,13 +99,8 @@ function showNotification(message, type = "info") {
 }
 function updateGreeting() {
 
-    let name = localStorage.getItem("username");
+    let name = localStorage.getItem("username" || "Guest");
 
-    // If no name has been saved, show the welcome modal
-    if (!name) {
-        name = "Guest";
-        return;
-    }
 
     // Update profile badge
     username.textContent = name;
@@ -136,13 +135,17 @@ if (changeNameBtn) {
 
         welcomeModal.classList.add("show");
 
+        setTimeout(function () {
+            nameInput.focus();
+        }, 100);
+
     });
 
 }
 
 saveName.addEventListener("click", function () {
 
-    const name = nameInput.value.trim();
+    const name = nameInput.value.trim().replace(/\s+/g, " ");
 
     if (name === "") {
 
@@ -160,6 +163,15 @@ saveName.addEventListener("click", function () {
     updateGreeting();
 
     showNotification(`👋 Welcome, ${name}!`, "success");
+
+});
+nameInput.addEventListener("keydown", function (event) {
+
+    if (event.key === "Enter") {
+
+        saveName.click();
+
+    }
 
 });
 
@@ -586,6 +598,43 @@ cancelEdit.addEventListener("click", function () {
     editModal.classList.remove("show");
 
     taskToEdit = null;
+
+});
+window.addEventListener("click", function (event) {
+
+    if (event.target === editModal) {
+        editModal.classList.remove("show");
+        taskToEdit = null;
+    }
+
+    if (event.target === deleteModal) {
+        deleteModal.classList.remove("show");
+        taskToDelete = null;
+    }
+
+    if (event.target === welcomeModal) {
+
+        // Don't allow closing if no username exists yet
+        if (localStorage.getItem("username")) {
+            welcomeModal.classList.remove("show");
+        }
+
+    }
+
+});
+document.addEventListener("keydown", function (event) {
+
+    if (event.key !== "Escape") return;
+
+    editModal.classList.remove("show");
+    deleteModal.classList.remove("show");
+
+    taskToEdit = null;
+    taskToDelete = null;
+
+    if (localStorage.getItem("username")) {
+        welcomeModal.classList.remove("show");
+    }
 
 });
 
