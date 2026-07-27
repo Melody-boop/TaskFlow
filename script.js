@@ -99,29 +99,23 @@ function showNotification(message, type = "info") {
 }
 function updateGreeting() {
 
-    let name = localStorage.getItem("username" || "Guest");
+    const name = localStorage.getItem("username") || "Guest";
 
-
-    // Update profile badge
     username.textContent = name;
 
-    // Decide greeting based on time
     const hour = new Date().getHours();
 
     let message = "";
 
     if (hour < 12) {
         message = "🌅 Good Morning";
-    }
-    else if (hour < 18) {
+    } else if (hour < 18) {
         message = "☀️ Good Afternoon";
-    }
-    else {
+    } else {
         message = "🌙 Good Evening";
     }
 
     greeting.textContent = `${message}, ${name}!`;
-
 }
 
 
@@ -141,6 +135,9 @@ if (changeNameBtn) {
 
     });
 
+}
+if (!localStorage.getItem("username")) {
+    welcomeModal.classList.add("show");
 }
 
 saveName.addEventListener("click", function () {
