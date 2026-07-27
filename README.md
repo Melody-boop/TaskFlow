@@ -6,7 +6,7 @@ Built with **HTML5, CSS3, and JavaScript (ES6)**, TaskFlow focuses on clean UI d
 
 ## 🚀 Live Demo
 
-🔗 **Live Application:** [Add your GitHub Pages link here]
+🔗 Coming soon
 
 ## 📌 Features
 
@@ -76,7 +76,7 @@ To run TaskFlow locally:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/TaskFlow.git
+git clone https://github.com/melody-boop/TaskFlow.git
 ```
 
 2. Navigate into the project folder:
@@ -92,8 +92,6 @@ No additional installation or dependencies are required.
 ---
 
 ## 📸 Preview
-
-Add your application screenshots here:
 
 ```
 ![TaskFlow Preview](images/taskflow-preview.png)
@@ -136,7 +134,7 @@ Possible future enhancements include:
 Computer Science Student | Aspiring Software Engineer
 
 * GitHub: [Melody-boop](https://github.com/Melody-boop)
-* LinkedIn: [Add your LinkedIn profile]
+* LinkedIn: ( https://linkedin.com/in/melody-mwayitsi-901100317 )
 
 ---
 
